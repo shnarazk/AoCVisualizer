@@ -13,25 +13,25 @@ Class {
 { #category : 'public' }
 AoC2023 class >> day20 [
 
-   self new day20 open
+   ^ self new day20; open; yourself
 ]
 
 { #category : 'public' }
 AoC2023 class >> day21 [
 
-   self new day21 open
+   ^ self new day21; open; yourself
 ]
 
 { #category : 'public' }
 AoC2023 class >> day24 [
 
-   self new day24 open
+   ^ self new day24; open; yourself
 ]
 
 { #category : 'public' }
 AoC2023 class >> day25 [
 
-   self new day25 open
+   ^ self new day25; open; yourself
 ]
 
 { #category : 'private - building' }
@@ -94,7 +94,7 @@ AoC2023 >> day20graph: aCollection [
 AoC2023 >> day20load [
 
    | data nodes |
-   data := (baseDirectory / 'tmp/2023/day20.json') asFileReference readStreamDo: [ :stream |
+   data := (baseDirectory / '2023/day20.json') asFileReference readStreamDo: [ :stream |
               STON fromStream: stream ].
    nodes := data inject: Dictionary new into: [ :pool :each |
                | dic name props |
@@ -145,7 +145,7 @@ AoC2023 >> day21graph: anArray [
 AoC2023 >> day21load [
 
    | data nodes |
-   data := (baseDirectory / 'tmp/2023/day21.json') asFileReference readStreamDo: [ :stream |
+   data := (baseDirectory / '2023/day21.json') asFileReference readStreamDo: [ :stream |
               STON fromStream: stream ].
    nodes := (data collect: [ :each | each asArray ]) asArray.
    ^ nodes
@@ -167,6 +167,7 @@ AoC2023 >> day24graph: anArray [
    | canvas elements time scale |
    scale := 0.000000000001.
    time := 1.0 / scale.
+   self memo: 'scale = ' , scale asString , ', time from 0 to ' , time asString.
    canvas := RSCanvas new.
    elements := anArray collect: [ :pv |
                   | line start end |
@@ -187,7 +188,7 @@ AoC2023 >> day24graph: anArray [
 AoC2023 >> day24load [
    "Load [{position, speed)] json"
 
-   ^ (baseDirectory / 'tmp/2023/day24.json') asFileReference readStreamDo: [ :stream |
+   ^ (baseDirectory / '2023/day24.json') asFileReference readStreamDo: [ :stream |
         STON fromStream: stream ]
 ]
 
@@ -220,7 +221,7 @@ AoC2023 >> day25graph: aCollection [
 AoC2023 >> day25load [
 
    | data nodes |
-   data := (baseDirectory / 'tmp/2023/day25.json') asFileReference readStreamDo: [ :stream |
+   data := (baseDirectory / '2023/day25.json') asFileReference readStreamDo: [ :stream |
               STON fromStream: stream ].
    nodes := data inject: Dictionary new into: [ :dic :element |
                | to |
