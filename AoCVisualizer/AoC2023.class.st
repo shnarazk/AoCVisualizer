@@ -10,6 +10,16 @@ Class {
 }
 
 { #category : 'public' }
+AoC2023 class >> day10 [
+
+	<script>
+	| viewer |
+	viewer := self new day10.
+	viewer open.
+	^ viewer
+]
+
+{ #category : 'public' }
 AoC2023 class >> day20 [
 
 	<script>
@@ -47,6 +57,49 @@ AoC2023 class >> day25 [
 	viewer := self new day25.
 	viewer open.
 	^ viewer
+]
+
+{ #category : 'initialization' }
+AoC2023 >> day10 [
+	"Draw maze graph."
+
+	title := 'y2023 day10'.
+	update := [ self day10 ].
+	graph := self day10graph: self day10load
+]
+
+{ #category : 'private - building' }
+AoC2023 >> day10graph: anArray [
+	"Draw grid map"
+
+	| canvas elements black gray length |
+	black := Color black.
+	gray := Color white darker.
+	canvas := RSCanvas new.
+	length := anArray size.
+	elements := anArray inject: OrderedCollection new into: [ :array :row |
+		            row do: [ :cell |
+			            | box |
+			            box := RSBox new size: 2; model: cell; yourself.
+			            cell ifTrue: [ box color: black ]
+				            ifFalse: [ box color: gray ].
+			            array add: box; yourself ].
+		            array ].
+	elements := elements as: RSGroup.
+	canvas addAll: elements.
+	RSCellLayout new lineItemsCount: length; gapSize: 0; on: elements.
+	canvas @ RSCanvasController.
+	^ SpRoassalPresenter new canvas: canvas; yourself
+]
+
+{ #category : 'private - loading' }
+AoC2023 >> day10load [
+
+	| data nodes |
+	data := (baseDirectory / 'day10.json') asFileReference readStreamDo: [ :stream |
+		        STON fromStream: stream ].
+	nodes := (data collect: [ :each | each asArray ]) asArray.
+	^ nodes
 ]
 
 { #category : 'initialization' }
