@@ -53,7 +53,7 @@ AoCView >> initializePresenters [
 
 { #category : 'initialization' }
 AoCView >> initializeWindow: aWindowPresenter [
-aWindowPresenter title: title; initialExtent: 600@660
+aWindowPresenter title: title; initialExtent: 800@860
 ]
 
 { #category : 'accessing' }

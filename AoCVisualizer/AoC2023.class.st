@@ -65,14 +65,15 @@ AoC2023 >> day10 [
 
 	title := 'y2023 day10'.
 	update := [ self day10 ].
-	graph := self day10graph: self day10load
+	graph := self day10graph
 ]
 
 { #category : 'private - building' }
-AoC2023 >> day10graph: anArray [
+AoC2023 >> day10graph [
 	"Draw grid map"
 
-	| canvas elements black gray length |
+	| anArray canvas elements black gray length |
+	anArray := self day10load.
 	black := Color black.
 	gray := Color white darker.
 	canvas := RSCanvas new.
@@ -107,13 +108,14 @@ AoC2023 >> day20 [
 
 	title := 'y2023 day20'.
 	update := [ self day20 ].
-	graph := self day20graph: self day20load
+	graph := self day20graph
 ]
 
 { #category : 'private - building' }
-AoC2023 >> day20graph: aCollection [
+AoC2023 >> day20graph [
 
-	| canvas elements flipflipLineBuilder conjunctionLineBuilder |
+	| aCollection canvas elements flipflipLineBuilder conjunctionLineBuilder |
+	aCollection := self day20load.
 	canvas := RSCanvas new.
 	elements := aCollection keys collect: [ :name | RSEllipse new size: 5; model: name ] as: RSGroup.
 	elements @ RSDraggable.
@@ -154,14 +156,15 @@ AoC2023 >> day21 [
 
 	title := 'y2023 day21'.
 	update := [ self day21 ].
-	graph := self day21graph: self day21load
+	graph := self day21graph
 ]
 
 { #category : 'private - building' }
-AoC2023 >> day21graph: anArray [
+AoC2023 >> day21graph [
 	"Draw grid map"
 
-	| canvas elements black gray length |
+	| anArray canvas elements black gray length |
+	anArray := self day21load.
 	black := Color black.
 	gray := Color white darker.
 	canvas := RSCanvas new.
@@ -196,14 +199,15 @@ AoC2023 >> day24 [
 
 	title := 'y2023 day24'.
 	update := [ self day24 ].
-	graph := self day24graph: self day24load
+	graph := self day24graph
 ]
 
 { #category : 'private - building' }
-AoC2023 >> day24graph: anArray [
+AoC2023 >> day24graph [
 	"Draw lines."
 
-	| canvas elements time scale |
+	| anArray canvas elements time scale |
+	anArray := self day24load.
 	scale := 0.000000000001.
 	time := 1.0 / scale.
 	self memo: 'scale = ' , scale asString , ', time from 0 to ' , time asString.
@@ -236,14 +240,15 @@ AoC2023 >> day25 [
 
 	title := 'y2023 day25'.
 	update := [ self day25 ].
-	graph := self day25graph: self day25load
+	graph := self day25graph
 ]
 
 { #category : 'private - building' }
-AoC2023 >> day25graph: aCollection [
+AoC2023 >> day25graph [
 	"Draw node-edge graph"
 
-	| canvas lb elements |
+	| aCollection canvas lb elements |
+	aCollection := self day25load.
 	canvas := RSCanvas new.
 	elements := aCollection keys collect: [ :c | RSEllipse new size: 5; model: c ] as: RSGroup.
 	elements @ RSDraggable.
