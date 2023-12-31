@@ -1,5 +1,5 @@
 "
-I am a class for AoC visualizers.
+I am a class to visualize AoC _problems_, I mean data.
 "
 Class {
 	#name : 'AoCView',
