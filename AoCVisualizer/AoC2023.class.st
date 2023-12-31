@@ -13,29 +13,41 @@ Class {
 { #category : 'public' }
 AoC2023 class >> day20 [
 
-   <script>
-   ^ self new day20; open; yourself
+	<script>
+	| viewer |
+	viewer := self new day20.
+	viewer open.
+	^ viewer
 ]
 
 { #category : 'public' }
 AoC2023 class >> day21 [
 
-   <script>
-   ^ self new day21; open; yourself
+	<script>
+	| viewer |
+	viewer := self new day21.
+	viewer open.
+	^ viewer
 ]
 
 { #category : 'public' }
 AoC2023 class >> day24 [
 
-   <script>
-   ^ self new day24; open; yourself
+	<script>
+	| viewer |
+	viewer := self new day24.
+	viewer open.
+	^ viewer
 ]
 
 { #category : 'public' }
 AoC2023 class >> day25 [
 
-   <script>
-   ^ self new day25; open; yourself
+	<script>
+	| viewer |
+	viewer := self new day25.
+	viewer open.
+	^ viewer
 ]
 
 { #category : 'initialization' }
