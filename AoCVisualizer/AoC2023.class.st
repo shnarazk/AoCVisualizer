@@ -5,7 +5,6 @@ I am visualizer for AoC 2023 problems.
 Class {
 	#name : 'AoC2023',
 	#superclass : 'AoCView',
-	#classTraits : '{} + TraitedClass',
 	#category : 'AoCVisualizer',
 	#package : 'AoCVisualizer'
 }
