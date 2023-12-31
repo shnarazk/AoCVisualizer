@@ -12,6 +12,7 @@ Class {
 { #category : 'public' }
 AoC2023 class >> day20 [
 
+	<script>
 	| viewer |
 	viewer := self new day20.
 	viewer open.
@@ -21,6 +22,7 @@ AoC2023 class >> day20 [
 { #category : 'public' }
 AoC2023 class >> day21 [
 
+	<script>
 	| viewer |
 	viewer := self new day21.
 	viewer open.
@@ -30,6 +32,7 @@ AoC2023 class >> day21 [
 { #category : 'public' }
 AoC2023 class >> day24 [
 
+	<script>
 	| viewer |
 	viewer := self new day24.
 	viewer open.
@@ -39,6 +42,7 @@ AoC2023 class >> day24 [
 { #category : 'public' }
 AoC2023 class >> day25 [
 
+	<script>
 	| viewer |
 	viewer := self new day25.
 	viewer open.
