@@ -38,28 +38,6 @@ AoC2023 class >> day25 [
    ^ self new day25; open; yourself
 ]
 
-{ #category : 'private - building' }
-AoC2023 >> csday20graph: aCollection [
-	"Draw connection graph"
-
-	| canvas elements flipflipLineBuilder conjunctionLineBuilder |
-	canvas := RSCanvas new.
-	elements := aCollection keys collect: [ :name | RSEllipse new size: 5; model: name ] as: RSGroup.
-	elements @ RSDraggable.
-	canvas addAll: elements.
-	flipflipLineBuilder := RSLineBuilder line.
-	flipflipLineBuilder canvas: canvas; color: Color red; connectFromAll: [ :each |
-			((aCollection at: each) at: #type) = 'FlipFlop' ifTrue: [ (aCollection at: each) at: #inputs ]
-				ifFalse: [ {  } ] ].
-	conjunctionLineBuilder := RSLineBuilder line.
-	conjunctionLineBuilder canvas: canvas; color: Color blue; connectFromAll: [ :each |
-			((aCollection at: each) at: #type) = 'Conjunction' ifTrue: [ (aCollection at: each) at: #inputs ]
-				ifFalse: [ {  } ] ].
-	RSTreeLayout new on: elements.
-	canvas @ RSCanvasController.
-	^ SpRoassalPresenter new canvas: canvas; yourself
-]
-
 { #category : 'initialization' }
 AoC2023 >> day20 [
 
