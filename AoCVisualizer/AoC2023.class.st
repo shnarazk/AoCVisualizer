@@ -122,6 +122,28 @@ AoC2023 >> day19 [
 	graph := self day19graph
 ]
 
+{ #category : 'private - building' }
+AoC2023 >> day19graph [
+    "Draw grid map"
+
+    | anArray canvas elements lb |
+    anArray := self day19load.
+    canvas := RSCanvas new.
+    elements := anArray inject: Set new into: [ :aSet :link |
+                    aSet add: (link at: 1).
+                    aSet add: (link at: 2).
+                    aSet ].
+    elements := elements collect: [ :name | RSEllipse new size: 5; model: name ].
+    elements := elements as: RSGroup.
+    canvas addAll: elements.
+    lb := RSLineBuilder line.
+    lb canvas: canvas; color: Color red; connectToAll: [ :each |
+            (anArray select: [ :link | (link at: 1) = each ]) collect: [ :link | link at: 2 ] ].
+    RSTreeLayout new on: elements.
+    canvas @ RSCanvasController.
+    ^ SpRoassalPresenter new canvas: canvas; yourself
+]
+
 { #category : 'private - loading' }
 AoC2023 >> day19load [
 
