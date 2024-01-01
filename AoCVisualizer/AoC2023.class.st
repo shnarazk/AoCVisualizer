@@ -20,6 +20,16 @@ AoC2023 class >> day10 [
 ]
 
 { #category : 'public' }
+AoC2023 class >> day19 [
+
+	<script>
+	| viewer |
+	viewer := self new day19.
+	viewer open.
+	^ viewer
+]
+
+{ #category : 'public' }
 AoC2023 class >> day20 [
 
 	<script>
@@ -101,6 +111,21 @@ AoC2023 >> day10load [
 		        STON fromStream: stream ].
 	nodes := (data collect: [ :each | each asArray ]) asArray.
 	^ nodes
+]
+
+{ #category : 'initialization' }
+AoC2023 >> day19 [
+	"Draw maze graph."
+
+	title := 'y2023 day19'.
+	update := [ self day19 ].
+	graph := self day19graph
+]
+
+{ #category : 'private - loading' }
+AoC2023 >> day19load [
+
+    ^ (baseDirectory / 'day19.json') asFileReference readStreamDo: [ :stream | STON fromStream: stream ]
 ]
 
 { #category : 'initialization' }
