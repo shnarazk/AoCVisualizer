@@ -17,7 +17,8 @@ AoCData class >> baseDirectory [
 { #category : 'accessing' }
 AoCData class >> dataFilename [
 
-    ^ (self baseDirectory / ('day' , ('00' , self class asString last: 2) , '.json')) asFileReference 
+    ^ (self baseDirectory / self year asString
+       / ('day' , ('00' , self day asString last: 2) , '.json')) asFileReference
 ]
 
 { #category : 'accessing' }
@@ -33,15 +34,34 @@ AoCData class >> isAbstract [
 ]
 
 { #category : 'accessing' }
+AoCData class >> open [
+
+    <script>
+    ^ (AoCPresenter newFor: self new) open; yourself
+]
+
+{ #category : 'accessing' }
 AoCData class >> year [
 
     self subclassResponsibility 
 ]
 
 { #category : 'accessing' }
-AoCData >> graph [
+AoCData >> buildDataModelFrom: aJson [
 
     self subclassResponsibility
+]
+
+{ #category : 'drawing - roassal' }
+AoCData >> buildRoassalCanvasFrom: aDataModel [
+
+    self subclassResponsibility
+]
+
+{ #category : 'accessing' }
+AoCData >> dataModel [
+
+    ^ self buildDataModelFrom: self jsonData
 ]
 
 { #category : 'accessing' }
@@ -51,8 +71,8 @@ AoCData >> jsonData [
           STON fromStream: stream ]
 ]
 
-{ #category : 'presenter building' }
-AoCData >> renderOn: aPreseter [
+{ #category : 'drawing - roassal' }
+AoCData >> roassalCanvas [
 
-    aPreseter canvas: self graph
+    ^ self buildRoassalCanvasFrom: self dataModel
 ]

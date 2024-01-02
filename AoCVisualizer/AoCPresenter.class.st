@@ -1,9 +1,10 @@
+"
+I am a Spec application to view AoC data.
+"
 Class {
 	#name : 'AoCPresenter',
 	#superclass : 'SpPresenter',
 	#instVars : [
-		'title',
-		'baseDirectory',
 		'memoPresenter',
 		'graphPresenter',
 		'updateButton',
@@ -14,22 +15,10 @@ Class {
 }
 
 { #category : 'instance creation' }
-AoCPresenter class >> newFor: anAoCDataClass [
+AoCPresenter class >> newFor: anAoCData [
 
-    ^ self new dataModel: anAoCDataClass new;
+    ^ self new dataModel: anAoCData;
           yourself
-]
-
-{ #category : 'accessing' }
-AoCPresenter >> baseDirectory [
-
-	^ baseDirectory
-]
-
-{ #category : 'accessing' }
-AoCPresenter >> baseDirectory: anObject [
-
-	baseDirectory := anObject
 ]
 
 { #category : 'accessing' }
@@ -41,7 +30,8 @@ AoCPresenter >> dataModel [
 { #category : 'accessing' }
 AoCPresenter >> dataModel: anObject [
 
-	dataModel := anObject
+    dataModel := anObject.
+    graphPresenter canvas: dataModel roassalCanvas
 ]
 
 { #category : 'layout' }
@@ -68,13 +58,6 @@ AoCPresenter >> graphPresenter: anObject [
 ]
 
 { #category : 'initialization' }
-AoCPresenter >> initialize [
-
-    title := 'AoC Data Visualizer'.
-    baseDirectory := '/'
-]
-
-{ #category : 'initialization' }
 AoCPresenter >> initializePresenters [
 
     memoPresenter := self newLabel.
@@ -85,8 +68,8 @@ AoCPresenter >> initializePresenters [
 { #category : 'initialization' }
 AoCPresenter >> initializeWindow: aWindowPresenter [
 
-    aWindowPresenter title: title;
-        initialExtent: 800 @ 860
+    <todo: 'set title'>
+    aWindowPresenter initialExtent: 800 @ 860
 ]
 
 { #category : 'accessing' }
@@ -102,15 +85,10 @@ AoCPresenter >> memoPresenter: anObject [
 ]
 
 { #category : 'accessing' }
-AoCPresenter >> title1 [
+AoCPresenter >> newGraphPresenter [
 
-	^ title
-]
-
-{ #category : 'accessing' }
-AoCPresenter >> title: anObject [
-
-	title := anObject
+    ^ self newRoassal canvas: self dataModel roassalCanvas;
+          yourself
 ]
 
 { #category : 'accessing' }
@@ -123,4 +101,10 @@ AoCPresenter >> updateButton [
 AoCPresenter >> updateButton: anObject [
 
 	updateButton := anObject
+]
+
+{ #category : 'initialization' }
+AoCPresenter >> updatePresenter [
+
+    dataModel ifNotNil: [ graphPresenter canvas: dataModel roassalCanvas ]
 ]
