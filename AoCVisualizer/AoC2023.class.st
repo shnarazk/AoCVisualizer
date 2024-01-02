@@ -50,6 +50,16 @@ AoC2023 class >> day21 [
 ]
 
 { #category : 'public' }
+AoC2023 class >> day23 [
+
+    <script>
+    | viewer |
+    viewer := self new day23.
+    viewer open.
+    ^ viewer
+]
+
+{ #category : 'public' }
 AoC2023 class >> day24 [
 
 	<script>
@@ -239,6 +249,66 @@ AoC2023 >> day21load [
 		        STON fromStream: stream ].
 	nodes := (data collect: [ :each | each asArray ]) asArray.
 	^ nodes
+]
+
+{ #category : 'initialization' }
+AoC2023 >> day23 [
+    "Draw maze graph."
+
+    title := 'y2023 day23'.
+    update := [ self day23 ].
+    graph := self day23graph
+]
+
+{ #category : 'private - building' }
+AoC2023 >> day23graph [
+    "Draw grid map"
+
+    | anArray canvas elements black gray red length branch |
+    anArray := self day23load.
+    black := Color black.
+    gray := Color white darker.
+    red := Color red.
+    canvas := RSCanvas new.
+    length := anArray size.
+    branch := 0.
+    elements := anArray inject: OrderedCollection new into: [ :array :row |
+                    row do: [ :cell |
+                        | box |
+                        box := RSBox new size: 3;
+                                   model: cell;
+                                   yourself.
+                        cell = 0 ifTrue: [ box color: gray ].
+                        cell = 1 ifTrue: [ box color: black ].
+                        cell = 2 ifTrue: [
+                            box color: red;
+                                model: branch.
+                            branch := branch + 1 ].
+                        array add: box;
+                            yourself ].
+                    array ].
+    elements := elements as: RSGroup.
+    canvas addAll: elements.
+    "lb := RSLineBuilder line.
+    lb canvas: canvas;
+    color: Color red;
+    connectFrom: [ :each | each - 1 ]."
+    RSCellLayout new lineItemsCount: length;
+        gapSize: 0;
+        on: elements.
+    canvas @ RSCanvasController.
+    ^ SpRoassalPresenter new canvas: canvas;
+          yourself
+]
+
+{ #category : 'private - loading' }
+AoC2023 >> day23load [
+
+    | data nodes |
+    data := (baseDirectory / 'day23.json') asFileReference readStreamDo: [ :stream |
+                STON fromStream: stream ].
+    nodes := (data collect: [ :each | each asArray ]) asArray.
+    ^ nodes
 ]
 
 { #category : 'initialization' }
