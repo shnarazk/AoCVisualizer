@@ -262,53 +262,38 @@ AoC2023 >> day23 [
 
 { #category : 'private - building' }
 AoC2023 >> day23graph [
-    "Draw grid map"
+	"Draw 2D grid map and aux line."
 
-    | anArray canvas elements black gray red length branch |
-    anArray := self day23load.
-    black := Color black.
-    gray := Color white darker.
-    red := Color red.
-    canvas := RSCanvas new.
-    length := anArray size.
-    branch := 0.
-    elements := anArray inject: OrderedCollection new into: [ :array :row |
-                    row do: [ :cell |
-                        | box |
-                        box := RSBox new size: 3;
-                                   model: cell;
-                                   yourself.
-                        cell = 0 ifTrue: [ box color: gray ].
-                        cell = 1 ifTrue: [ box color: black ].
-                        cell = 2 ifTrue: [
-                            box color: red;
-                                model: branch.
-                            branch := branch + 1 ].
-                        array add: box;
-                            yourself ].
-                    array ].
-    elements := elements as: RSGroup.
-    canvas addAll: elements.
-    "lb := RSLineBuilder line.
-    lb canvas: canvas;
-    color: Color red;
-    connectFrom: [ :each | each - 1 ]."
-    RSCellLayout new lineItemsCount: length;
-        gapSize: 0;
-        on: elements.
-    canvas @ RSCanvasController.
-    ^ SpRoassalPresenter new canvas: canvas;
-          yourself
+	| data canvas elements branch route next |
+	data := self day23load.
+	route := data at: 'route'.
+	next := Dictionary new.
+	route doWithIndex: [ :n :i | next at: n + 1 put: (route at: i + 1 ifAbsent: -3) + 1 ].
+	canvas := RSCanvas new.
+	branch := 1.
+	elements := (data at: 'map') inject: OrderedCollection new into: [ :array :row |
+		            row do: [ :cell |
+			            | box |
+			            box := RSBox new size: 3; yourself.
+			            cell = 0 ifTrue: [ box color: Color white darker; model: 0 ].
+			            cell = 1 ifTrue: [ box color: Color black; model: -1 ].
+			            cell = 2 ifTrue: [
+				            box color: Color red; model: branch .
+				            branch := branch + 1 ].
+			            array add: box; yourself ].
+		            array ].
+	elements := elements as: RSGroup.
+	canvas addAll: elements.
+	RSLineBuilder line canvas: canvas; color: Color red; connectTo: [ :each | next at: each ifAbsent: nil ].
+	RSCellLayout new lineItemsCount: (data at: 'map') size; gapSize: 0; on: elements.
+	canvas @ RSCanvasController.
+	^ SpRoassalPresenter new canvas: canvas; yourself
 ]
 
 { #category : 'private - loading' }
 AoC2023 >> day23load [
 
-    | data nodes |
-    data := (baseDirectory / 'day23.json') asFileReference readStreamDo: [ :stream |
-                STON fromStream: stream ].
-    nodes := (data collect: [ :each | each asArray ]) asArray.
-    ^ nodes
+	^ (baseDirectory / 'day23.json') asFileReference readStreamDo: [ :stream | STON fromStream: stream ]
 ]
 
 { #category : 'initialization' }
