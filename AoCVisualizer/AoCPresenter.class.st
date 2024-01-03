@@ -4,7 +4,7 @@ I am a Spec application to view AoC data.
 Class {
 	#name : 'AoCPresenter',
 	#superclass : 'SpPresenter',
-	#classTraits : '{} + TraitedClass',
+	#classTraits : '',
 	#instVars : [
 		'memoPresenter',
 		'graphPresenter',
