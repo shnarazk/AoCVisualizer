@@ -9,9 +9,9 @@ Concrete subclasses have to implement:
 Class {
 	#name : 'AoCData',
 	#superclass : 'Object',
-	#category : 'AoCVisualizer-core',
+	#category : 'AoCVisualizer-Core',
 	#package : 'AoCVisualizer',
-	#tag : 'core'
+	#tag : 'Core'
 }
 
 { #category : 'accessing' }
@@ -74,6 +74,12 @@ AoCData >> buildRoassalCanvasFrom: aDataModel [
 
     <script: 'self open'>
     self subclassResponsibility
+]
+
+{ #category : 'private' }
+AoCData >> comment [
+
+	^ nil
 ]
 
 { #category : 'accessing' }

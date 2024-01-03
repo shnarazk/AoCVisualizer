@@ -4,6 +4,9 @@ dray lines that represent equations.
 Class {
 	#name : 'AoCData2023Day24',
 	#superclass : 'AoCData2023',
+	#instVars : [
+		'scale'
+	],
 	#category : 'AoCVisualizer-AoC2023',
 	#package : 'AoCVisualizer',
 	#tag : 'AoC2023'
@@ -25,24 +28,29 @@ AoCData2023Day24 >> buildDataModelFrom: aJson [
 AoCData2023Day24 >> buildRoassalCanvasFrom: anArray [
 	"Draw lines."
 
-	<todo: 'make a way to set meme'>
 	<script: 'self open'>
-	| elements time scale |
+	| elements time |
 	scale := 0.000000000001.
 	time := 1.0 / scale.
-	"self memo: 'scale = ' , scale asString , ', time from 0 to ' , time asString."
 	elements := anArray collect: [ :pv |
-		            | line start end |
-		            start := (pv at: 1) * scale.
-		            end := (pv at: 1) + ((pv at: 2) negated * time).
-		            end := end * scale.
-		            line := RSLine new width: 1.
-		            (pv at: 2) > 0 ifTrue: [ line color: Color blue ].
-		            line startPoint: 0 @ start;
-			            endPoint: 1000 @ end;
+		            | start end |
+		            start := pv at: 1.
+		            end := start - ((pv at: 2) * time).
+		            RSLine new width: 1;
+			            color: ((pv at: 2) > 0 ifTrue: [ Color blue ]
+					             ifFalse: [ Color red ]);
+			            startPoint: 0 @ (start * scale);
+			            endPoint: 1000 @ (end * scale);
 			            yourself ].
-	elements := elements as: RSGroup.
-	^ RSCanvas new addAll: elements;
+	^ RSCanvas new addAll: (elements as: RSGroup);
 		  @ RSCanvasController;
 		  yourself
+]
+
+{ #category : 'private' }
+AoCData2023Day24 >> comment [
+
+	| time |
+	time := 1.0 / scale.
+	^ 'scale = ' , scale asString , ', time from 0 to ' , time asString
 ]

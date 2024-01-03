@@ -11,9 +11,9 @@ Class {
 		'updateButton',
 		'dataModel'
 	],
-	#category : 'AoCVisualizer-core',
+	#category : 'AoCVisualizer-Core',
 	#package : 'AoCVisualizer',
-	#tag : 'core'
+	#tag : 'Core'
 }
 
 { #category : 'instance creation' }
@@ -38,8 +38,10 @@ AoCPresenter >> dataModel [
 { #category : 'accessing' }
 AoCPresenter >> dataModel: anObject [
 
-    dataModel := anObject.
-    graphPresenter canvas: dataModel roassalCanvas
+	dataModel := anObject.
+	graphPresenter canvas: dataModel roassalCanvas.
+	"comment might be set as a side-effect of roassalCanvas"
+	memoPresenter label: dataModel comment
 ]
 
 { #category : 'layout' }
@@ -86,41 +88,10 @@ AoCPresenter >> initializeWindow: aWindowPresenter [
 	aWindowPresenter title: title
 ]
 
-{ #category : 'accessing' }
-AoCPresenter >> memoPresenter [
-
-	^ memoPresenter
-]
-
-{ #category : 'accessing' }
-AoCPresenter >> memoPresenter: anObject [
-
-	memoPresenter := anObject
-]
-
-{ #category : 'accessing' }
-AoCPresenter >> newGraphPresenter [
-
-    | presenter |
-    presenter := self newRoassal.
-    dataModel ifNotNil: [ presenter canvas: self dataModel roassalCanvas ].
-    ^ presenter
-]
-
-{ #category : 'accessing' }
-AoCPresenter >> updateButton [
-
-	^ updateButton
-]
-
-{ #category : 'accessing' }
-AoCPresenter >> updateButton: anObject [
-
-	updateButton := anObject
-]
-
 { #category : 'initialization' }
 AoCPresenter >> updatePresenter [
 
-    dataModel ifNotNil: [ graphPresenter canvas: dataModel roassalCanvas ]
+	dataModel ifNotNil: [
+		memoPresenter label: dataModel comment.
+		graphPresenter canvas: dataModel roassalCanvas ]
 ]
