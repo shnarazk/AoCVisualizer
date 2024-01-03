@@ -1,3 +1,6 @@
+"
+AoC2023: Rust.
+"
 Class {
 	#name : 'AoCResult2023',
 	#superclass : 'AoCResult',

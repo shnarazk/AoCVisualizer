@@ -1,3 +1,6 @@
+"
+I am a reporter of AoC results.
+"
 Class {
 	#name : 'AoCResult',
 	#superclass : 'SpPresenter',
@@ -11,6 +14,7 @@ AoCResult >> open [
 
 	<script: 'self new open'>
 	| results data densityPlot |
+
 	results := self results.
 	data := (results at: 'Rust') collect: [ :each | each log: 2 ].
 	densityPlot := RSDensityPlot data: data.
@@ -21,4 +25,10 @@ AoCResult >> open [
 	densityPlot color: Color green.
 	^ densityPlot open;
 		  yourself
+]
+
+{ #category : 'accessing' }
+AoCResult >> results [
+
+	self subclassResponsibility
 ]

@@ -30,10 +30,12 @@ AoCData2023Day24 >> buildRoassalCanvasFrom: anArray [
 
 	<script: 'self open'>
 	| elements time |
+
 	scale := 0.000000000001.
 	time := 1.0 / scale.
 	elements := anArray collect: [ :pv |
 		            | start end |
+
 		            start := pv at: 1.
 		            end := start - ((pv at: 2) * time).
 		            RSLine new width: 1;
