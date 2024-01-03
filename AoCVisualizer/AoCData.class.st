@@ -9,8 +9,9 @@ Concrete subclasses have to implement:
 Class {
 	#name : 'AoCData',
 	#superclass : 'Object',
-	#category : 'AoCVisualizer',
-	#package : 'AoCVisualizer'
+	#category : 'AoCVisualizer-core',
+	#package : 'AoCVisualizer',
+	#tag : 'core'
 }
 
 { #category : 'accessing' }

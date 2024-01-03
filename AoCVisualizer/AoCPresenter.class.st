@@ -4,14 +4,16 @@ I am a Spec application to view AoC data.
 Class {
 	#name : 'AoCPresenter',
 	#superclass : 'SpPresenter',
+	#classTraits : '{} + TraitedClass',
 	#instVars : [
 		'memoPresenter',
 		'graphPresenter',
 		'updateButton',
 		'dataModel'
 	],
-	#category : 'AoCVisualizer',
-	#package : 'AoCVisualizer'
+	#category : 'AoCVisualizer-core',
+	#package : 'AoCVisualizer',
+	#tag : 'core'
 }
 
 { #category : 'instance creation' }

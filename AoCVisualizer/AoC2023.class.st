@@ -5,8 +5,10 @@ I am visualizer for AoC 2023 problems.
 Class {
 	#name : 'AoC2023',
 	#superclass : 'AoCView',
-	#category : 'AoCVisualizer',
-	#package : 'AoCVisualizer'
+	#classTraits : '{} + TraitedClass',
+	#category : 'AoCVisualizer-deprecated',
+	#package : 'AoCVisualizer',
+	#tag : 'deprecated'
 }
 
 { #category : 'public' }

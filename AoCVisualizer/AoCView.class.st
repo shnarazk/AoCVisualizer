@@ -4,6 +4,7 @@ I am a class to visualize AoC _problems_, I mean data.
 Class {
 	#name : 'AoCView',
 	#superclass : 'SpPresenter',
+	#classTraits : '{} + TraitedClass',
 	#instVars : [
 		'baseDirectory',
 		'updateButton',
@@ -13,9 +14,15 @@ Class {
 		'memo',
 		'memoLabel'
 	],
-	#category : 'AoCVisualizer',
-	#package : 'AoCVisualizer'
+	#category : 'AoCVisualizer-deprecated',
+	#package : 'AoCVisualizer',
+	#tag : 'deprecated'
 }
+
+{ #category : 'deprecation' }
+AoCView class >> isDeprecated [
+	^ true
+]
 
 { #category : 'initialization' }
 AoCView >> connectPresenters [
