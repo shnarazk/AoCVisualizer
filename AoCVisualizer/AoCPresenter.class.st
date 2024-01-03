@@ -21,6 +21,12 @@ AoCPresenter class >> newFor: anAoCData [
           yourself
 ]
 
+{ #category : 'initialization' }
+AoCPresenter >> connectPresenters [
+
+	updateButton action: [ self updatePresenter ]
+]
+
 { #category : 'accessing' }
 AoCPresenter >> dataModel [
 
@@ -60,16 +66,22 @@ AoCPresenter >> graphPresenter: anObject [
 { #category : 'initialization' }
 AoCPresenter >> initializePresenters [
 
-    memoPresenter := self newLabel.
-    graphPresenter := self newRoassal.
-    updateButton := self newButton
+	memoPresenter := self newLabel.
+	graphPresenter := self newRoassal.
+	updateButton := self newButton label: 'update';
+		                icon: (self iconNamed: #smallUpdate);
+		                yourself
 ]
 
 { #category : 'initialization' }
 AoCPresenter >> initializeWindow: aWindowPresenter [
 
-    <todo: 'set title'>
-    aWindowPresenter initialExtent: 800 @ 860
+	| title |
+	aWindowPresenter initialExtent: 800 @ 860.
+	title := dataModel ifNotNil: [
+		         'AoC y' , dataModel class yearString , ' day' , dataModel class dayString ]
+		         ifNil: [ 'AoC' ].
+	aWindowPresenter title: title
 ]
 
 { #category : 'accessing' }
@@ -87,8 +99,10 @@ AoCPresenter >> memoPresenter: anObject [
 { #category : 'accessing' }
 AoCPresenter >> newGraphPresenter [
 
-    ^ self newRoassal canvas: self dataModel roassalCanvas;
-          yourself
+    | presenter |
+    presenter := self newRoassal.
+    dataModel ifNotNil: [ presenter canvas: self dataModel roassalCanvas ].
+    ^ presenter
 ]
 
 { #category : 'accessing' }

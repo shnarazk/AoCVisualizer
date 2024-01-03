@@ -1,5 +1,10 @@
 "
 I am an abstract class to provide AoC input data.
+Concrete subclasses have to implement:
+
+- _buildDataModelFrom:_
+- _buildRoassalCanvasFrom:_
+
 "
 Class {
 	#name : 'AoCData',
@@ -17,14 +22,19 @@ AoCData class >> baseDirectory [
 { #category : 'accessing' }
 AoCData class >> dataFilename [
 
-    ^ (self baseDirectory / self year asString
-       / ('day' , ('00' , self day asString last: 2) , '.json')) asFileReference
+	^ self baseDirectory / self yearString / ('day' , self dayString , '.json')
 ]
 
 { #category : 'accessing' }
 AoCData class >> day [
 
     self subclassResponsibility
+]
+
+{ #category : 'accessing' }
+AoCData class >> dayString [
+
+	^ '0' , self day asString last: 2
 ]
 
 { #category : 'testing' }
@@ -47,14 +57,21 @@ AoCData class >> year [
 ]
 
 { #category : 'accessing' }
+AoCData class >> yearString [
+
+	^ self year asString
+]
+
+{ #category : 'private' }
 AoCData >> buildDataModelFrom: aJson [
 
     self subclassResponsibility
 ]
 
-{ #category : 'drawing - roassal' }
+{ #category : 'private' }
 AoCData >> buildRoassalCanvasFrom: aDataModel [
 
+    <script: 'self open'>
     self subclassResponsibility
 ]
 
@@ -67,8 +84,7 @@ AoCData >> dataModel [
 { #category : 'accessing' }
 AoCData >> jsonData [
 
-     ^ self class dataFilename readStreamDo: [ :stream |
-          STON fromStream: stream ]
+    ^ self class dataFilename asFileReference readStreamDo: [ :stream | STON fromStream: stream ]
 ]
 
 { #category : 'drawing - roassal' }

@@ -1,3 +1,6 @@
+"
+I am an abstract class for AoC2023.
+"
 Class {
 	#name : 'AoCData2023',
 	#superclass : 'AoCData',
