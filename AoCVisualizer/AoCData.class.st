@@ -79,7 +79,7 @@ AoCData >> buildRoassalCanvasFrom: aDataModel [
 { #category : 'private' }
 AoCData >> comment [
 
-	^ nil
+	^ ''
 ]
 
 { #category : 'accessing' }
