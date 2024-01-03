@@ -89,6 +89,11 @@ AoCData >> dataModel [
 ]
 
 { #category : 'accessing' }
+AoCData >> description [
+^'AoC y' , self class yearString , ' day' , self class dayString
+]
+
+{ #category : 'accessing' }
 AoCData >> jsonData [
 
     ^ self class dataFilename asFileReference readStreamDo: [ :stream | STON fromStream: stream ]

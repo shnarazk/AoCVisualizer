@@ -82,9 +82,7 @@ AoCPresenter >> initializeWindow: aWindowPresenter [
 
 	| title |
 	aWindowPresenter initialExtent: 800 @ 860.
-	title := dataModel ifNotNil: [
-		         'AoC y' , dataModel class yearString , ' day' , dataModel class dayString ]
-		         ifNil: [ 'AoC' ].
+	title := dataModel ifNotNil: [ dataModel description ] ifNil: [ 'AoC' ].
 	aWindowPresenter title: title
 ]
 
