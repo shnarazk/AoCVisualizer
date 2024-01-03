@@ -4,7 +4,6 @@ AoC2023: Rust.
 Class {
 	#name : 'AoCResult2023',
 	#superclass : 'AoCResult',
-	#classTraits : '',
 	#category : 'AoCVisualizer-AoC2023',
 	#package : 'AoCVisualizer',
 	#tag : 'AoC2023'
