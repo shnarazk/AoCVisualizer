@@ -9,26 +9,48 @@ Class {
 	#tag : 'AoC2023'
 }
 
+{ #category : 'accessing' }
+AoCResult class >> baseDirectory [
+
+    ^ (Smalltalk os environment at: 'HOME') asPath / 'Repositories/advent-of-code/tmp'
+]
+
+{ #category : 'accessing' }
+AoCResult class >> dataFilename [
+
+	^ self baseDirectory / self yearString / 'execution_time.json' 
+]
+
+{ #category : 'accessing' }
+AoCResult class >> year [
+
+    self subclassResponsibility 
+]
+
+{ #category : 'accessing' }
+AoCResult class >> yearString [
+
+	^ self year asString
+]
+
+{ #category : 'accessing' }
+AoCResult >> jsonData [
+
+    ^ self class dataFilename asFileReference readStreamDo: [ :stream | STON fromStream: stream ]
+]
+
 { #category : 'showing' }
 AoCResult >> open [
 
 	<script: 'self new open'>
-	| results data densityPlot |
-
-	results := self results.
-	data := (results at: 'Rust') collect: [ :each | each log: 2 ].
+	| data densityPlot |
+	"results := self results.""data := (results at: 'Rust') collect: [ :each | each log: 2 ]."
+	data := self jsonData collect: [ :each | (each at: 2) log: 2 ].
 	densityPlot := RSDensityPlot data: data.
 	densityPlot bandwidth: 1.
-	densityPlot xlabel: 'Execution time (msec)';
-		ylabel: 'Dencity';
-		title: 'Density plot'.
+	densityPlot xlabel: 'Log2-scaled Execution time (msec)'; ylabel: 'Dencity'; title:
+			'AoC' , self class yearString.
 	densityPlot color: Color green.
-	^ densityPlot open;
-		  yourself
-]
-
-{ #category : 'accessing' }
-AoCResult >> results [
-
-	self subclassResponsibility
+	"densityPlot extent: 800 @ 600."
+	^ densityPlot open; yourself
 ]
