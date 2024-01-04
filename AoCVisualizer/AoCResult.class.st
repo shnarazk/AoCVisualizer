@@ -45,12 +45,13 @@ AoCResult >> open [
 	<script: 'self new open'>
 	| data densityPlot |
 	"results := self results.""data := (results at: 'Rust') collect: [ :each | each log: 2 ]."
-	data := self jsonData collect: [ :each | (each at: 2) log: 2 ].
+	data := self jsonData collect: [ :each | ((each at: 2) log: 2) max: 0 ].
 	densityPlot := RSDensityPlot data: data.
 	densityPlot bandwidth: 1.
 	densityPlot xlabel: 'Log2-scaled Execution time (msec)'; ylabel: 'Dencity'; title:
-			'AoC' , self class yearString.
-	densityPlot color: Color green.
-	"densityPlot extent: 800 @ 600."
+			'AoC' , self class yearString; color: Color green; minChartValueX: -5; maxChartValueX: 20;
+		xTicks: ((-2 to: 8) collect: [ :each | each * 2 ])
+		labels: ((-2 to: 8) collect: [ :each | each * 2]).
+	densityPlot extent: 500 @ 280.
 	^ densityPlot open; yourself
 ]
