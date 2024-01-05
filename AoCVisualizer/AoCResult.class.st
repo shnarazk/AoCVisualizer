@@ -50,8 +50,8 @@ AoCResult >> open [
 	densityPlot bandwidth: 1.
 	densityPlot xlabel: 'Log2-scaled Execution time (msec)'; ylabel: 'Dencity'; title:
 			'AoC' , self class yearString; color: Color green; minChartValueX: -5; maxChartValueX: 20;
-		xTicks: ((-2 to: 8) collect: [ :each | each * 2 ])
-		labels: ((-2 to: 8) collect: [ :each | each * 2]).
+		xTicks: ((-2 to: 10) collect: [ :each | each * 2 ])
+		labels: ((-2 to: 10) collect: [ :each | each * 2 ]).
 	densityPlot extent: 500 @ 280.
 	^ densityPlot open; yourself
 ]
