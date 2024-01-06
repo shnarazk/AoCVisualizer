@@ -46,8 +46,8 @@ AoCResult >> open [
 	| data densityPlot |
 	"results := self results.""data := (results at: 'Rust') collect: [ :each | each log: 2 ]."
 	data := self jsonData.
-	data := data isDictionary ifTrue: [ data collect: [ :each | ((each at: 2) log: 2) max: 0 ] ]
-		        ifFalse: [ data collect: [ :each | (each log: 2) max: 0 ] ].
+	data := data isDictionary ifTrue: [ data collect: [ :each | ((each at: 2) log: 2) max: -3 ] ]
+		        ifFalse: [ data collect: [ :each | (each log: 2) max: -3 ] ].
 	densityPlot := RSDensityPlot data: data.
 	densityPlot bandwidth: 1.
 	densityPlot xlabel: 'Log2-scaled execution time (msec)';
@@ -56,8 +56,8 @@ AoCResult >> open [
 		color: Color green;
 		minChartValueX: -5;
 		maxChartValueX: 20;
-		xTicks: ((-2 to: 10) collect: [ :each | each * 2 ])
-		labels: ((-2 to: 10) collect: [ :each | each * 2 ]).
+		xTicks: ((-3 to: 10) collect: [ :each | each * 2 ])
+		labels: ((-3 to: 10) collect: [ :each | each * 2 ]).
 	densityPlot extent: 500 @ 280.
 	^ densityPlot open;
 		  yourself
