@@ -19,5 +19,5 @@ AoCAllResults >> jsonData [
 	| classes jsons |
 	classes := AoCResult subclasses reject: [ :class | class = self class ].
 	jsons := classes collect: [ :class | class new jsonData collect: [ :each | each at: 2 ] ].
-	^ jsons flattened
+	^ (jsons flattened collectWithIndex: [ :each :index | { index .  each} ]) asArray
 ]

@@ -44,10 +44,7 @@ AoCResult >> open [
 
 	<script: 'self new open'>
 	| data densityPlot |
-	"results := self results.""data := (results at: 'Rust') collect: [ :each | each log: 2 ]."
-	data := self jsonData.
-	data := data isDictionary ifTrue: [ data collect: [ :each | ((each at: 2) log: 2) max: -3 ] ]
-		        ifFalse: [ data collect: [ :each | (each log: 2) max: -3 ] ].
+	data := self jsonData collect: [ :each | ((each at: 2) log: 2) max: -3 ].
 	densityPlot := RSDensityPlot data: data.
 	densityPlot bandwidth: 1.
 	densityPlot xlabel: 'Log2-scaled execution time (msec)';
