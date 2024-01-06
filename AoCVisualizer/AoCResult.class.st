@@ -50,7 +50,7 @@ AoCResult >> open [
 		        ifFalse: [ data collect: [ :each | (each log: 2) max: 0 ] ].
 	densityPlot := RSDensityPlot data: data.
 	densityPlot bandwidth: 1.
-	densityPlot xlabel: 'Log2-scaled Execution time (msec)';
+	densityPlot xlabel: 'Log2-scaled execution time (msec)';
 		ylabel: 'Dencity';
 		title: 'AoC' , self class yearString;
 		color: Color green;
