@@ -12,7 +12,7 @@ Class {
 { #category : 'accessing' }
 AoCResult class >> baseDirectory [
 
-    ^ (Smalltalk os environment at: 'HOME') asPath / 'Repositories/advent-of-code/tmp'
+    ^ (Smalltalk os environment at: 'HOME') asPath / 'Repositories/advent-of-code/misc'
 ]
 
 { #category : 'accessing' }
