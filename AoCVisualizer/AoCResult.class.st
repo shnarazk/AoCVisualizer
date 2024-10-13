@@ -22,6 +22,12 @@ AoCResult class >> dataFilename [
 ]
 
 { #category : 'accessing' }
+AoCResult class >> graphTitle [
+
+	^ self yearString 
+]
+
+{ #category : 'accessing' }
 AoCResult class >> year [
 
     self subclassResponsibility 
@@ -42,14 +48,15 @@ AoCResult >> jsonData [
 { #category : 'showing' }
 AoCResult >> open [
 
+"Open the data file, then open a graph view"
 	<script: 'self new open'>
 	| data densityPlot |
-	data := self jsonData collect: [ :each | ((each at: 2) log: 2) max: -3 ].
+	data := self jsonData collect: [ :each | ((each at: #time) log: 2) max: -3 ].
 	densityPlot := RSDensityPlot data: data.
 	densityPlot bandwidth: 1.
 	densityPlot xlabel: 'Log2-scaled execution time (msec)';
 		ylabel: 'Dencity';
-		title: 'AoC' , self class yearString;
+		title: 'AoC' , self class graphTitle;
 		color: Color green;
 		minChartValueX: -5;
 		maxChartValueX: 20;
