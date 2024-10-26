@@ -27,22 +27,30 @@ AoCData2023Day10 >> buildRoassalCanvasFrom: anArray [
 
 	<script: 'self open'>
 	| canvas elements |
-	elements := (anArray inject: OrderedCollection new into: [ :array :row |
-		             row do: [ :cell |
-			             | box |
-			             box := RSBox new size: 2;
-				                    model: cell;
-				                    color: (cell ifTrue: [ Color black ]
-						                     ifFalse: [ Color white darker ]);
-				                    yourself.
-			             array add: box;
-				             yourself ].
-		             array ]) as: RSGroup.
-	canvas := RSCanvas new addAll: elements;
+	elements := (anArray
+		             inject: OrderedCollection new
+		             into: [ :array :row |
+			             row do: [ :cell |
+				             | box |
+				             box := RSBox new
+					                    size: 2;
+					                    model: cell;
+					                    color: (cell
+							                     ifTrue: [ Color black ]
+							                     ifFalse: [ Color white darker ]);
+					                    yourself.
+				             array
+					             add: box;
+					             yourself ].
+			             array ]) as: RSGroup.
+	canvas := RSCanvas new
+		          addAll: elements;
 		          yourself.
-	RSCellLayout new lineItemsCount: anArray size;
+	RSCellLayout new
+		lineItemsCount: anArray size;
 		gapSize: 0;
 		on: elements.
-	^ canvas @ RSCanvasController;
+	^ canvas
+		  @ RSCanvasController;
 		  yourself
 ]

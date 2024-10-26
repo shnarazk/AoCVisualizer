@@ -41,17 +41,20 @@ AoCData2023Day25 >> buildRoassalCanvasFrom: aCollection [
 	| canvas lb elements |
 	elements := aCollection keys
 		            collect: [ :c |
-			            RSEllipse new size: 5;
+			            RSEllipse new
+				            size: 5;
 				            model: c ]
 		            as: RSGroup.
 	elements @ RSDraggable.
 	canvas := RSCanvas new.
 	canvas addAll: elements.
 	lb := RSLineBuilder line.
-	lb canvas: canvas;
+	lb
+		canvas: canvas;
 		color: Color red;
 		connectFromAll: [ :each | aCollection at: each ].
 	RSForceBasedLayout new on: elements.
-	^ canvas @ RSCanvasController;
+	^ canvas
+		  @ RSCanvasController;
 		  yourself
 ]

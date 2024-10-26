@@ -29,20 +29,24 @@ AoCData2023Day19 >> buildRoassalCanvasFrom: anArray [
 	| canvas elements lb |
 	canvas := RSCanvas new.
 	elements := anArray inject: Set new into: [ :aSet :link |
-		            aSet add: (link at: 1).
+		            aSet add: link first.
 		            aSet add: (link at: 2).
 		            aSet ].
 	elements := elements collect: [ :name |
-		            RSEllipse new size: 5;
+		            RSEllipse new
+			            size: 5;
 			            model: name ].
 	elements := elements as: RSGroup.
 	canvas addAll: elements.
 	lb := RSLineBuilder line.
-	lb canvas: canvas;
+	lb
+		canvas: canvas;
 		color: Color red;
 		connectToAll: [ :each |
-			(anArray select: [ :link | (link at: 1) = each ]) collect: [ :link | link at: 2 ] ].
+			(anArray select: [ :link | link first = each ]) collect: [ :link |
+					link at: 2 ] ].
 	RSTreeLayout new on: elements.
-	^ canvas @ RSCanvasController;
+	^ canvas
+		  @ RSCanvasController;
 		  yourself
 ]

@@ -22,9 +22,9 @@ AoCData2023Day20 >> buildDataModelFrom: aJson [
 	nodes := aJson inject: Dictionary new into: [ :pool :each |
 		         | dic name props |
 		         dic := IdentityDictionary new.
-		         name := each at: 1.
+		         name := each first.
 		         props := each at: 2.
-		         dic at: #name put: (each at: 1);
+		         dic at: #name put: (each first);
 			         at: #inputs put: (props at: 'hash') keys;
 			         at: #output put: (props at: 'dests');
 			         at: #type put: (props at: 'module_type').

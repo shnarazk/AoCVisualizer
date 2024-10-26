@@ -36,7 +36,7 @@ AoCData2023Day24 >> buildRoassalCanvasFrom: anArray [
 	elements := anArray collect: [ :pv |
 		            | start end |
 
-		            start := pv at: 1.
+		            start := pv first.
 		            end := start - ((pv at: 2) * time).
 		            RSLine new width: 1;
 			            color: ((pv at: 2) > 0 ifTrue: [ Color blue ]
