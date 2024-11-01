@@ -4,9 +4,9 @@ I am a reporter of AoC results.
 Class {
 	#name : 'AoCResult',
 	#superclass : 'SpPresenter',
-	#category : 'AoCVisualizer-AoC2023',
+	#category : 'AoCVisualizer-AoC',
 	#package : 'AoCVisualizer',
-	#tag : 'AoC2023'
+	#tag : 'AoC'
 }
 
 { #category : 'accessing' }

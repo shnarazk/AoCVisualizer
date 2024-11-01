@@ -1,9 +1,12 @@
+"
+I am the repoter of AoC2015.
+"
 Class {
 	#name : 'AoCResult2015',
 	#superclass : 'AoCResult',
-	#category : 'AoCVisualizer-AoC2023',
+	#category : 'AoCVisualizer-AoC',
 	#package : 'AoCVisualizer',
-	#tag : 'AoC2023'
+	#tag : 'AoC'
 }
 
 { #category : 'accessing' }

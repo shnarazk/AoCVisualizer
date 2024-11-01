@@ -1,3 +1,6 @@
+"
+I am the reporter on AoC results.
+"
 Class {
 	#name : 'AoCAllResults',
 	#superclass : 'AoCResult',

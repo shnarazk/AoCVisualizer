@@ -22,7 +22,7 @@ AoCData2023Day25 >> buildDataModelFrom: data [
 		  | to |
 		  to := element at: 2.
 		  dic
-			  at: (element at: 1)
+			  at: (element first)
 			  update: [ :set |
 				  set add: to;
 					  yourself ]

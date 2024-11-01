@@ -1,9 +1,12 @@
+"
+I am the repoter of AoC2022.
+"
 Class {
 	#name : 'AoCResult2022',
 	#superclass : 'AoCResult',
-	#category : 'AoCVisualizer-AoC2022',
+	#category : 'AoCVisualizer-AoC',
 	#package : 'AoCVisualizer',
-	#tag : 'AoC2022'
+	#tag : 'AoC'
 }
 
 { #category : 'accessing' }
