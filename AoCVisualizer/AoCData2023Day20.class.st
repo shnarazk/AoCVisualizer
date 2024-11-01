@@ -35,30 +35,31 @@ AoCData2023Day20 >> buildDataModelFrom: aJson [
 
 { #category : 'private' }
 AoCData2023Day20 >> buildRoassalCanvasFrom: aCollection [
+  "Draw a layered network"
 
-	<script: 'self open'>
-	| canvas elements flipflipLineBuilder conjunctionLineBuilder |
-	canvas := RSCanvas new.
-	elements := aCollection keys
-		            collect: [ :name |
-			            RSEllipse new size: 5;
-				            model: name ]
-		            as: RSGroup.
-	elements @ RSDraggable.
-	canvas addAll: elements.
-	flipflipLineBuilder := RSLineBuilder line.
-	flipflipLineBuilder canvas: canvas;
-		color: Color red;
-		connectFromAll: [ :each |
-			((aCollection at: each) at: #type) = 'FlipFlop' ifTrue: [ (aCollection at: each) at: #inputs ]
-				ifFalse: [ {  } ] ].
-	conjunctionLineBuilder := RSLineBuilder line.
-	conjunctionLineBuilder canvas: canvas;
-		color: Color blue;
-		connectFromAll: [ :each |
-			((aCollection at: each) at: #type) = 'Conjunction' ifTrue: [ (aCollection at: each) at: #inputs ]
-				ifFalse: [ {  } ] ].
-	RSTreeLayout new on: elements.
-	canvas @ RSCanvasController.
-	^ canvas
+  <script: 'self open'>
+  | canvas elements flipflipLineBuilder conjunctionLineBuilder |
+  canvas := RSCanvas new.
+  elements := aCollection keys
+                collect: [ :name |
+                  RSEllipse new size: 5;
+                    model: name ]
+                as: RSGroup.
+  elements @ RSDraggable.
+  canvas addAll: elements.
+  flipflipLineBuilder := RSLineBuilder line.
+  flipflipLineBuilder canvas: canvas;
+    color: Color red;
+    connectFromAll: [ :each |
+      ((aCollection at: each) at: #type) = 'FlipFlop' ifTrue: [ (aCollection at: each) at: #inputs ]
+        ifFalse: [ {  } ] ].
+  conjunctionLineBuilder := RSLineBuilder line.
+  conjunctionLineBuilder canvas: canvas;
+    color: Color blue;
+    connectFromAll: [ :each |
+      ((aCollection at: each) at: #type) = 'Conjunction' ifTrue: [ (aCollection at: each) at: #inputs ]
+        ifFalse: [ {  } ] ].
+  RSTreeLayout new on: elements.
+  canvas @ RSCanvasController.
+  ^ canvas
 ]
