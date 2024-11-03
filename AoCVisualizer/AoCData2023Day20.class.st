@@ -40,12 +40,7 @@ AoCData2023Day20 >> buildRoassalCanvasFrom: aCollection [
   <script: 'self open'>
   | canvas elements flipflipLineBuilder conjunctionLineBuilder |
   canvas := RSCanvas new.
-  elements := aCollection keys
-                collect: [ :name |
-                  RSEllipse new size: 5;
-                    model: name ]
-                as: RSGroup.
-  elements @ RSDraggable.
+  elements := self makeGraphElements: aCollection.
   canvas addAll: elements.
   flipflipLineBuilder := RSLineBuilder line.
   flipflipLineBuilder canvas: canvas;
@@ -62,4 +57,21 @@ AoCData2023Day20 >> buildRoassalCanvasFrom: aCollection [
   RSTreeLayout new on: elements.
   canvas @ RSCanvasController.
   ^ canvas
+]
+
+{ #category : 'private' }
+AoCData2023Day20 >> makeGraphElements: aCollection [
+
+  | elements |
+  elements := aCollection keys
+                collect: [ :name |
+                  | size |
+                  size := (((aCollection at: name) at: #output) includes: 'dh') ifTrue: [ 8 ]
+                            ifFalse: [ 5 ].
+                  RSEllipse new size: size;
+                    model: name ]
+                as: RSGroup.
+  elements @ RSDraggable.
+  elements @ RSPopup.
+  ^ elements
 ]
