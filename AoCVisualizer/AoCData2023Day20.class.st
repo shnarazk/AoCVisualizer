@@ -61,6 +61,7 @@ AoCData2023Day20 >> buildRoassalCanvasFrom: aCollection [
 
 { #category : 'private' }
 AoCData2023Day20 >> makeGraphElements: aCollection [
+  "generates a collection of RSEllipse representing a module"
 
   | elements |
   elements := aCollection keys
