@@ -43,20 +43,14 @@ AoCData2023Day20 >> buildRoassalCanvasFrom: aCollection [
   elements := self makeGraphElements: aCollection.
   canvas addAll: elements.
   flipflipLineBuilder := RSLineBuilder line.
-  flipflipLineBuilder canvas: canvas;
-    color: Color red;
-    connectFromAll: [ :each |
-      ((aCollection at: each) at: #type) = 'FlipFlop' ifTrue: [ (aCollection at: each) at: #inputs ]
-        ifFalse: [ {  } ] ].
+  flipflipLineBuilder canvas: canvas; color: Color red; connectFromAll: [ :each |
+      ((aCollection at: each) at: #type) = 'FlipFlop' ifTrue: [ (aCollection at: each) at: #inputs ] ifFalse: [ {  } ] ].
   conjunctionLineBuilder := RSLineBuilder line.
-  conjunctionLineBuilder canvas: canvas;
-    color: Color blue;
-    connectFromAll: [ :each |
+  conjunctionLineBuilder canvas: canvas; color: Color blue; connectFromAll: [ :each |
       ((aCollection at: each) at: #type) = 'Conjunction' ifTrue: [ (aCollection at: each) at: #inputs ]
         ifFalse: [ {  } ] ].
   RSTreeLayout new on: elements.
-  canvas @ RSCanvasController.
-  ^ canvas
+  ^ canvas @ RSCanvasController; yourself
 ]
 
 { #category : 'private' }

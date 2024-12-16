@@ -35,26 +35,14 @@ AoCData2023Day25 >> buildDataModelFrom: data [
 
 { #category : 'private' }
 AoCData2023Day25 >> buildRoassalCanvasFrom: aCollection [
-	"Draw node-edge graph"
+  "Draw node-edge graph"
 
-	<script: 'self open'>
-	| canvas lb elements |
-	elements := aCollection keys
-		            collect: [ :c |
-			            RSEllipse new
-				            size: 5;
-				            model: c ]
-		            as: RSGroup.
-	elements @ RSDraggable.
-	canvas := RSCanvas new.
-	canvas addAll: elements.
-	lb := RSLineBuilder line.
-	lb
-		canvas: canvas;
-		color: Color red;
-		connectFromAll: [ :each | aCollection at: each ].
-	RSForceBasedLayout new on: elements.
-	^ canvas
-		  @ RSCanvasController;
-		  yourself
+  <script: 'self open'>
+  | canvas lb elements |
+  elements := aCollection keys collect: [ :c | RSEllipse new size: 5; model: c ] as: RSGroup.
+  elements @ RSDraggable.
+  canvas := RSCanvas new addAll: elements; yourself.
+  lb := RSLineBuilder line canvas: canvas; color: Color red; connectFromAll: [ :each | aCollection at: each ]; yourself.
+  RSForceBasedLayout new on: elements.
+  ^ canvas @ RSCanvasController; yourself
 ]
