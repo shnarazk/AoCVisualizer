@@ -8,3 +8,9 @@ Class {
 	#package : 'AoCVisualizer',
 	#tag : 'AoC2024'
 }
+
+{ #category : 'accessing' }
+AoCData2024 class >> year [
+
+  ^2024
+]
